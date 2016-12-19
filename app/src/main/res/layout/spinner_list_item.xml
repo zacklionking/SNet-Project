@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_tinted_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left|center_vertical"
+    android:ellipsize="marquee"
+    android:paddingLeft="@dimen/middle_padding"
+    android:paddingTop="@dimen/middle_padding"
+    android:paddingBottom="@dimen/middle_padding"
+    android:singleLine="true"/>

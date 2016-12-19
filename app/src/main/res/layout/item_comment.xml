@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/middle_padding"
+    android:paddingLeft="@dimen/middle_padding"
+    android:paddingRight="@dimen/middle_padding"
+    android:background="@color/colorActionBarLight">
+
+    <ImageView android:id="@id/user_avatar"
+        android:layout_width="@dimen/avatar_size_small"
+        android:layout_height="@dimen/avatar_size_small"
+        android:layout_marginRight="@dimen/middle_padding"/>
+
+    <TextView style="@style/TextAppearance.Primary"
+        android:id="@id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/user_avatar" />
+
+    <TextView
+        android:id="@+id/comment_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_alignLeft="@id/user_name"
+        android:textSize="@dimen/text_size_small"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/comment_body"
+        android:layout_marginTop="@dimen/middle_padding"
+        android:layout_marginRight="@dimen/middle_padding"
+        android:background="@color/colorDivider"/>
+
+</RelativeLayout>

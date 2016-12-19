@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <declare-styleable name="DribbbleView">
+        <attr name="color" format="color"/>
+        <attr name="initialSpeed" format="float"/>
+        <attr name="acceleratedSpeed" format="float"/>
+        <attr name="shadowVisibleHeight" format="float"/>
+        <attr name="decayCount" format="integer"/>
+        <attr name="rotationalSpeed" format="float"/>
+    </declare-styleable>
+    
+</resources>

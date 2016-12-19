@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_bar_height">60dp</dimen>
+    <dimen name="tab_bar_height">35dp</dimen>
+    <dimen name="title_bar_action_btn_width">30dp</dimen>
+
+    <dimen name="ultra_padding">40dp</dimen>
+    <dimen name="large_padding">20dp</dimen>
+    <dimen name="middle_padding">10dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+
+    <dimen name="text_size_default">15dp</dimen>
+    <dimen name="text_size_small">14dp</dimen>
+    <dimen name="text_size_middle">16dp</dimen>
+    <dimen name="text_size_large">18dp</dimen>
+    <dimen name="text_size_title">20dp</dimen>
+
+</resources>

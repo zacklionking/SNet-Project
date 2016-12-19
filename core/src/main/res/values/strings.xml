@@ -1,0 +1,4 @@
+<resources>
+    <string name="error_service_out">Service is taking a timeout for maintenance.</string>
+    <string name="error_unknown">Unknown error.</string>
+</resources>

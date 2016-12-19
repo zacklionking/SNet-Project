@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="shots_filter_type">
+        <item>Shots</item>
+        <item>Animated</item>
+        <item>Attachments</item>
+        <item>Debuts</item>
+        <item>Playoffs</item>
+        <item>Rebounds</item>
+        <item>Teams</item>
+    </array>
+
+    <array name="shots_filter_date">
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+        <item>Ever</item>
+    </array>
+
+    <array name="shots_filter_sort">
+        <item>Likes</item>
+        <item>Comments</item>
+        <item>Views</item>
+        <item>Recent</item>
+    </array>
+
+</resources>

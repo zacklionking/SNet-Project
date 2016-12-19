@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/middle_padding">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorActionBarLight"
+        android:paddingLeft="@dimen/large_padding"
+        android:paddingRight="@dimen/large_padding"
+        android:paddingTop="@dimen/middle_padding"
+        android:paddingBottom="@dimen/middle_padding">
+
+        <ImageView android:id="@id/user_avatar"
+            android:layout_width="@dimen/avatar_size_normal"
+            android:layout_height="@dimen/avatar_size_normal"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="@dimen/middle_padding" />
+
+        <TextView style="@style/TextAppearance.Primary"
+            android:id="@id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextLink"
+            android:layout_toRightOf="@id/user_avatar" />
+
+        <TextView
+            android:id="@+id/user_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_below="@id/user_name"
+            android:layout_alignLeft="@id/user_name"/>
+
+        <LinearLayout
+            android:id="@+id/user_shots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/middle_padding"
+            android:layout_below="@id/user_avatar"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorDivider"/>
+
+</LinearLayout>

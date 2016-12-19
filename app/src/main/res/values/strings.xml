@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Dribbble</string>
+    <string name="shots_title">Shots</string>
+    <string name="popular_title">Popular</string>
+    <string name="recent_title">Recent</string>
+    <string name="favorite_title">Likes</string>
+
+    <string name="no_description">No description.</string>
+
+    <string name="loading_shots">Loading shots ...</string>
+    <string name="loading_comments">Loading comments ...</string>
+    <string name="loading_shot_fail">Oops, something goes wrong ...\nClick to try again</string>
+
+    <string name="users">Users</string>
+    <string name="shots">Shots</string>
+    <string name="projects">Projects</string>
+    <string name="views">Views</string>
+    <string name="likes">Likes</string>
+    <string name="comments">Comments</string>
+    <string name="followers">Followers</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/large_padding"
+    app:cardCornerRadius="@dimen/middle_padding"
+    app:cardBackgroundColor="@color/colorActionBar"
+    app:contentPaddingTop="@dimen/middle_padding"
+    app:contentPaddingBottom="@dimen/middle_padding">
+
+    <jcoolj.com.dribbble.view.SWebView
+        android:id="@+id/login_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout android:id="@+id/loading_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorActionBar">
+
+        <jcoolj.com.dribbble.view.DribbbleView
+            android:id="@+id/web_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <TextView android:id="@+id/loading_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle_padding"
+            android:layout_below="@id/web_loading"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

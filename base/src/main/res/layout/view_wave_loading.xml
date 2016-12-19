@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <jcoolj.com.base.view.wave.Wave
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/loading_wave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:wave_height="middle"
+        app:wave_length="middle"
+        app:wave_hz="fast"
+        app:above_wave_color="@color/colorPrimary"
+        app:blow_wave_color="@color/colorPrimary"/>
+
+    <TextView android:id="@+id/loading_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorBackground"/>
+
+</merge>

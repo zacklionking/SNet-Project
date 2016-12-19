@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/title_bar_height">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_top"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/middle_padding">
+
+        <ImageView android:id="@id/user_avatar"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:scaleType="fitCenter"/>
+
+        <TextView style="@style/TextAppearance.Title"
+            android:id="@id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginTop="@dimen/middle_padding"/>
+
+        <TextView style="@style/TextAppearance.Secondary"
+            android:id="@+id/user_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorTextPrimary"
+            android:drawableLeft="@drawable/ic_location"
+            android:drawablePadding="@dimen/small_padding"
+            android:layout_marginTop="@dimen/middle_padding"/>
+
+        <TextView style="@style/TextAppearance.Primary"
+            android:id="@+id/user_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/large_padding"
+            android:layout_marginRight="@dimen/large_padding"/>
+
+        <LinearLayout android:id="@+id/user_relatives"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/large_padding"
+            android:layout_marginRight="@dimen/large_padding"
+            android:visibility="gone"/>
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle_padding"
+            android:layout_marginLeft="@dimen/large_padding"
+            android:layout_marginRight="@dimen/large_padding">
+
+            <TextView android:id="@+id/shots_count"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorTextSecondary"/>
+
+            <TextView android:id="@+id/projects_count"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorTextSecondary"/>
+
+            <TextView android:id="@+id/followers"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorTextSecondary"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View android:id="@+id/btn_like"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/large_padding"
+        android:layout_marginLeft="@dimen/middle_padding"
+        android:layout_marginRight="@dimen/large_padding"
+        android:background="@drawable/ic_like_normal"/>
+
+</FrameLayout>

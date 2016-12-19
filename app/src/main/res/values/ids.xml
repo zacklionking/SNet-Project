@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item type="id" name="user_avatar"/>
+    <item type="id" name="user_name"/>
+
+    <item type="id" name="dribbble"/>
+    <item type="id" name="loading"/>
+    <item type="id" name="loading_tip"/>
+
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <jcoolj.com.base.view.scrollable.ExtendRecyclerView
+        android:id="@+id/shot_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/comment_action"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_marginBottom="80dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:src="@android:drawable/ic_menu_send"-->
+        <!--android:background="@drawable/bg_btn_round"/>-->
+
+</merge>

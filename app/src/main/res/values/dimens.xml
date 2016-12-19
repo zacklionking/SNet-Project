@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dribbble_radius">40dp</dimen>
+
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="avatar_size_normal">45dp</dimen>
+    <dimen name="avatar_size">75dp</dimen>
+
+    <dimen name="attachments_height">65dp</dimen>
+
+</resources>

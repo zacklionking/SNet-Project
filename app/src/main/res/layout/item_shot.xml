@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:padding="@dimen/small_padding">
+
+    <ImageView android:id="@+id/shot_img"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:contentDescription="@null" />
+
+    <TextView android:id="@+id/shot_animated_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_small"
+        android:layout_margin="@dimen/small_padding"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="@dimen/middle_padding"
+        android:paddingRight="@dimen/middle_padding"
+        android:layout_gravity="right"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/colorTextPrimary"
+        android:text="GIF"
+        android:visibility="gone"/>
+
+    <TextView style="@style/TextAppearance.Secondary"
+        android:id="@+id/loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading_fail"
+        android:textColor="@color/colorActionBar"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <ImageView android:id="@+id/img_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

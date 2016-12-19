@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout android:id="@+id/title_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/large_padding"
+            android:paddingRight="@dimen/large_padding">
+
+            <ImageView android:id="@+id/back"
+                android:layout_width="@dimen/title_bar_action_btn_width"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
+            <TextView style="@style/TextAppearance.Title"
+                android:id="@+id/bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <LinearLayout android:id="@+id/title_bar_action_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
+            <LinearLayout android:id="@+id/title_bar_left_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@id/back"
+                android:layout_centerVertical="true"/>
+
+            <LinearLayout android:id="@+id/title_bar_right_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/middle_padding"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/pager_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:stl_indicatorThickness="@dimen/small_padding"
+            app:stl_distributeEvenly="true"
+            app:stl_defaultTabTextSize="@dimen/text_size_small"
+            app:stl_defaultTabTextColor="@color/color_text_tab"
+            app:stl_indicatorColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</merge>
