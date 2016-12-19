@@ -3,6 +3,7 @@ package jcoolj.com.base.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -47,10 +48,11 @@ public class TitleBar extends LinearLayout {
 
     public TitleBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setFitsSystemWindows(true);
-        setClipToPadding(true);
+//        setFitsSystemWindows(true);
+//        setClipToPadding(true);
         layoutInflater = LayoutInflater.from(context);
         drawerAnimator = new DrawerAnimator();
+        setOrientation(VERTICAL);
         inflate(context, R.layout.view_title_bar, this);
         initDefault();
         title = (TextView) findViewById(R.id.bar_title);
@@ -64,7 +66,10 @@ public class TitleBar extends LinearLayout {
         actionLeftContainer = (LinearLayout) findViewById(R.id.title_bar_left_actions);
         actionRightContainer = (LinearLayout) findViewById(R.id.title_bar_right_actions);
         statusBarHeight = PixelUtils.getStatusBarHeight(getContext());
-        titleContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, res.getDimensionPixelSize(R.dimen.title_bar_height) - statusBarHeight));
+        LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, res.getDimensionPixelSize(R.dimen.title_bar_height) - statusBarHeight);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            params.topMargin = statusBarHeight;
+        titleContainer.setLayoutParams(params);
     }
 
     public void setTitle(CharSequence title){
@@ -183,7 +188,10 @@ public class TitleBar extends LinearLayout {
 
     public int getTitleBarHeight(){
         Resources res = getResources();
-        return res.getDimensionPixelSize(R.dimen.title_bar_height) + res.getDimensionPixelSize(R.dimen.tab_bar_height) - statusBarHeight;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            return res.getDimensionPixelSize(R.dimen.title_bar_height) + res.getDimensionPixelSize(R.dimen.tab_bar_height);
+        else
+            return res.getDimensionPixelSize(R.dimen.title_bar_height) + res.getDimensionPixelSize(R.dimen.tab_bar_height) - statusBarHeight;
     }
 
 }

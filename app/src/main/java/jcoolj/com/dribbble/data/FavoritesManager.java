@@ -1,5 +1,7 @@
 package jcoolj.com.dribbble.data;
 
+import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +14,14 @@ public class FavoritesManager {
 
     public static final int TYPE_SHOT = 0;
     public static final int TYPE_USER = 1;
+
+    public static void registerFavorUsers(@NonNull Activity activity, LoaderManager.LoaderCallbacks callbacks){
+        activity.getLoaderManager().initLoader(TYPE_USER, null, callbacks);
+    }
+
+    public static void registerFavorShots(@NonNull Activity activity, LoaderManager.LoaderCallbacks callbacks){
+        activity.getLoaderManager().initLoader(TYPE_SHOT, null, callbacks);
+    }
 
     public static void add(@NonNull Context context, Shot shot){
         ContentValues values = new ContentValues();

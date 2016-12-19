@@ -13,6 +13,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -122,6 +123,10 @@ public class ShotCard extends FrameLayout implements Subscriber<List<Comment>>, 
         view_commentList.setAdapter(shotCardAdapter);
         view_commentList.addScrollViewCallbacks(this);
         view_commentList.setItemAnimator(null);
+
+        // 处理圆角背景在某些机型上莫名消失的兼容性问题
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+            view_commentList.setLayerType(LAYER_TYPE_SOFTWARE, null);
 
         View header = LayoutInflater.from(context).inflate(R.layout.view_shot_card_header, this, false);
         view_user_container = header.findViewById(R.id.user_container);

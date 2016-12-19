@@ -149,7 +149,7 @@ public class UserCard extends FrameLayout implements ScrollBehavior, View.OnClic
             view_projects_count.setText(Html.fromHtml("<b>" + user.getProjectsCount() + "</b> " + res.getString(R.string.projects)));
             view_followers_count.setText(Html.fromHtml("<b>" + user.getFollowersCount() + "</b> " + res.getString(R.string.followers)));
 
-            ((Activity) getContext()).getLoaderManager().initLoader(FavoritesManager.TYPE_USER, null, this);
+            FavoritesManager.registerFavorUsers((Activity) getContext(), this);
         } else
             userChanged = false;
     }
