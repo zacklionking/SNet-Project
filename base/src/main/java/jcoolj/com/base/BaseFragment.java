@@ -1,8 +1,10 @@
 package jcoolj.com.base;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
-import jcoolj.com.base.view.TitleBar;
+import jcoolj.com.base.view.actionbar.SmartActionBar;
 import jcoolj.com.core.support.IFragment;
 import jcoolj.com.core.utils.Logger;
 
@@ -34,9 +36,5 @@ public abstract class BaseFragment extends IFragment {
     protected void onShowFragment(){}
 
     protected void onHideFragment(){}
-
-    public TitleBar getTitleBar(){
-        return ((BaseActivity) getActivity()).getTitleBar();
-    }
 
 }

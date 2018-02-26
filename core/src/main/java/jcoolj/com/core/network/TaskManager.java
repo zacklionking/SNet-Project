@@ -11,14 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.okhttp.Request;
-
-import org.json.JSONObject;
-
 import jcoolj.com.core.support.IActivity;
 import jcoolj.com.core.support.IFragment;
 import jcoolj.com.core.support.IFragmentActivity;
 import jcoolj.com.core.utils.Logger;
+import okhttp3.Request;
 
 import static jcoolj.com.core.network.SNetManager.MSG_COMPLETE;
 import static jcoolj.com.core.network.SNetManager.MSG_FAILED;
@@ -32,7 +29,7 @@ public abstract class TaskManager {
 
     private Handler handler;
 
-    private SparseArray<STask> tasks;
+    private SparseArray<STask<?>> tasks;
 
     public TaskManager(){
         handler = new Handler(Looper.getMainLooper()){
@@ -41,14 +38,19 @@ public abstract class TaskManager {
                 STask task = (STask) msg.obj;
                 int id = task.getTaskId();
                 tasks.remove(id);
-                switch (msg.arg1){
+                switch (msg.what){
                     case MSG_COMPLETE:
-                        onTaskComplete(task);
+                        try {
+                            task.complete();
+                        } catch (Exception e) {
+                            Logger.d(toString() + "failed. Cause of " + e.getMessage());
+                            task.reportError(e);
+                        }
                         break;
                     case MSG_SERVICE_OUT:
                     case MSG_FAILED:
                     case MSG_TIMEOUT:
-                        onError(task);
+                        task.reportError();
                         break;
                 }
             }
@@ -68,19 +70,16 @@ public abstract class TaskManager {
         fragment.bindLifeCycleCallbacks(new FragmentLifeCycleCallbacks());
     }
 
-    protected STask sendTask(Subscriber subscriber, Request request, int requestId) {
+    protected <T> STask<T> newTask(Subscriber<T> subscriber, Request request, int requestId) {
         STask task = tasks.get(requestId);
         if(task != null){
             // 已有相同的任务，取消当前任务并发布新任务
             Logger.d(toString() + " canceled at " + System.currentTimeMillis() + ", start new one");
             task.cancel();
         }
-        task = new STask(requestId, request, subscriber, handler);
-        tasks.put(requestId, task);
-        Logger.d(toString() + " started at " + System.currentTimeMillis() + ", post by " + this + ", subscribed on " + subscriber);
-        SNetManager.getInstance().startTask(task);
-        subscriber.onSubscribe();
-        return task;
+        STask<T> taskNew = new STask<>(requestId, request, subscriber, handler);
+        tasks.put(requestId, taskNew);
+        return taskNew;
     }
 
     private void clearTasks(){
@@ -91,30 +90,6 @@ public abstract class TaskManager {
         }
         tasks.clear();
         Logger.d("Tasks cleared");
-    }
-
-    private void onTaskComplete(STask task){
-        Logger.d(toString() + " completed at " + System.currentTimeMillis());
-        ResponseWrapped response = task.getResponse();
-        try {
-            if(response.getCode() == 200){
-                onResponse(task);
-            } else {
-                JSONObject errorMsg = new JSONObject((String) response.getBody());
-                if(task.getSubscriber() != null)
-                    task.getSubscriber().onRefuse(new Exception(errorMsg.getString("message")));
-            }
-        } catch (Exception e) {
-            if(task.getSubscriber() != null)
-                task.getSubscriber().onRefuse(new Exception("Unknown error:" + response.getBody()));
-        }
-    }
-
-    protected abstract void onResponse(STask task) throws Exception;
-
-    protected void onError(STask task) {
-        if(task.getSubscriber() != null)
-            task.getSubscriber().onRefuse(task.getException());
     }
 
     private class ActivityLifeCycleCallbacks implements jcoolj.com.core.support.ActivityLifeCycleCallbacks {

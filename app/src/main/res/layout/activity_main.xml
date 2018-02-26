@@ -8,11 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <jcoolj.com.dribbble.view.WaveView
+    <jcoolj.com.dribbble.view.WaveLoadingView
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar_height"
         android:layout_alignParentBottom="true"
         android:visibility="invisible"/>
+
+    <include layout="@layout/layout_action_bar"
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

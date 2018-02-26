@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '25.0.2'
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 26
     }
     buildTypes {
         release {
@@ -19,10 +19,10 @@ android {
 
 dependencies {
     compile project(':core')
-    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.5.0@aar'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:cardview-v7:24.2.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
 }

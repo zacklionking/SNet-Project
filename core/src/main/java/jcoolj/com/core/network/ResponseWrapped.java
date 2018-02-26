@@ -1,15 +1,15 @@
 package jcoolj.com.core.network;
 
-import com.squareup.okhttp.Headers;
+import okhttp3.Headers;
 
 public class ResponseWrapped {
 
     private int code;
     private Headers headers;
 
-    private final Object body;
+    private final String body;
 
-    public ResponseWrapped(int code, Headers headers, Object body){
+    public ResponseWrapped(int code, Headers headers, String body){
         this.code = code;
         this.headers = headers;
         this.body = body;
@@ -23,7 +23,7 @@ public class ResponseWrapped {
         return headers;
     }
 
-    public Object getBody() {
+    public String getBody() {
         return body;
     }
 

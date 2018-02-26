@@ -2,11 +2,11 @@ package jcoolj.com.core.network;
 
 import android.support.annotation.NonNull;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Basic network manager
@@ -26,16 +26,20 @@ public class SNetManager {
 
     private static SNetManager mInstance;
     public static SNetManager getInstance(){
-        if(mInstance == null)
-            mInstance = new SNetManager();
+        if(mInstance == null){
+            synchronized (SNetManager.class){
+                if(mInstance == null)
+                    mInstance = new SNetManager();
+            }
+        }
         return mInstance;
     }
 
     private SNetManager(){
-        mHttpClient = new OkHttpClient();
-        mHttpClient.setConnectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        mHttpClient.setReadTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        mHttpClient.setWriteTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        mHttpClient = new OkHttpClient.Builder().
+                connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).
+                readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).
+                writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).build();
     }
 
     private void newThreadPool(){

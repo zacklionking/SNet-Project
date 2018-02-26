@@ -1,10 +1,12 @@
-package jcoolj.com.base.view;
+package jcoolj.com.base.view.actionbar;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
+import android.support.annotation.StringRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -14,16 +16,36 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import jcoolj.com.base.R;
 import jcoolj.com.base.anim.DrawerAnimator;
 import jcoolj.com.base.utils.PixelUtils;
 
-public class TitleBar extends LinearLayout {
+public class SmartActionBar extends LinearLayout {
+
+    public static abstract class Model {
+        protected SmartActionBar actionBar;
+        protected Context context;
+
+        public Model(Context context){
+            this.context = context;
+        }
+    }
+
+    @IntDef({HORIZONTAL, VERTICAL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface OrientationMode {}
+
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
+
+    private @OrientationMode int orientation = HORIZONTAL;
 
     private static final int TYPE_ACTIONBAR = 0;
     private static final int TYPE_TAB = 1;
@@ -42,17 +64,17 @@ public class TitleBar extends LinearLayout {
     private LinearLayout actionRightContainer;
     private TextView title;
 
-    public TitleBar(Context context) {
+    public SmartActionBar(Context context) {
         this(context, null);
     }
 
-    public TitleBar(Context context, AttributeSet attrs) {
+    public SmartActionBar(Context context, AttributeSet attrs) {
         super(context, attrs);
 //        setFitsSystemWindows(true);
 //        setClipToPadding(true);
         layoutInflater = LayoutInflater.from(context);
         drawerAnimator = new DrawerAnimator();
-        setOrientation(VERTICAL);
+//        setOrientation(VERTICAL);
         inflate(context, R.layout.view_title_bar, this);
         initDefault();
         title = (TextView) findViewById(R.id.bar_title);
@@ -70,6 +92,10 @@ public class TitleBar extends LinearLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             params.topMargin = statusBarHeight;
         titleContainer.setLayoutParams(params);
+    }
+
+    public @OrientationMode int getOrientation(){
+        return orientation;
     }
 
     public void setTitle(CharSequence title){

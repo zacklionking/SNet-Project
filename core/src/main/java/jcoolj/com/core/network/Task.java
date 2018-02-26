@@ -8,6 +8,8 @@ import java.util.concurrent.TimeoutException;
 
 import jcoolj.com.core.utils.Logger;
 
+import static jcoolj.com.core.network.SNetManager.MSG_FAILED;
+
 /**
  * Created by Zack on 2016/12/1.
  */
@@ -17,9 +19,6 @@ public abstract class Task implements Runnable {
 
     private Throwable e;
 
-//    private long timeout = SNetManager.DEFAULT_TIMEOUT;
-//    private TimeUnit unit = TimeUnit.SECONDS;
-
     protected Handler handler;
 
     protected boolean canceled;
@@ -27,6 +26,10 @@ public abstract class Task implements Runnable {
     public Task(int taskId, Handler handler){
         this.taskId = taskId;
         this.handler = handler;
+    }
+
+    public void start(){
+        SNetManager.getInstance().startTask(this);
     }
 
     public void cancel() {
@@ -46,37 +49,11 @@ public abstract class Task implements Runnable {
         return e;
     }
 
-//    public long getTimeout() {
-//        return timeout;
-//    }
-//
-//    public void setTimeout(long timeout) {
-//        this.timeout = timeout;
-//    }
-//
-//    public void setTimeout(long timeout, TimeUnit unit) {
-//        this.timeout = timeout;
-//        this.unit = unit;
-//    }
-
     public boolean isCanceled(){
         return canceled;
     }
 
     public abstract void doWork() throws Exception;
-
-    protected void handleMessage(int msgId){
-        Message msg = handler.obtainMessage(msgId);
-        msg.arg1 = msgId;
-        msg.obj = this;
-        handler.sendMessage(msg);
-    }
-
-    protected void handleException(Exception e){
-        Logger.d(toString() + "failed. Cause of " + e.getMessage());
-        this.e = e;
-        handleMessage(SNetManager.MSG_FAILED);
-    }
 
     @Override
     public void run() {
@@ -93,6 +70,14 @@ public abstract class Task implements Runnable {
                 handler.removeCallbacksAndMessages(this);
             }
         }
+    }
+
+    void handleException(Throwable e){
+        Logger.d(toString() + "failed. Cause of " + e.getMessage());
+        Message msg = handler.obtainMessage(MSG_FAILED);
+        this.e = e;
+        msg.obj = this;
+        handler.sendMessage(msg);
     }
 
     @Override

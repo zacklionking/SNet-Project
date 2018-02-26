@@ -8,9 +8,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -22,7 +19,6 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -35,7 +31,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.util.ArrayList;
@@ -43,12 +38,10 @@ import java.util.List;
 
 import jcoolj.com.base.anim.PulseAnimator;
 import jcoolj.com.base.view.ExpandableLayout;
-import jcoolj.com.base.view.TouchImageView;
 import jcoolj.com.base.view.scrollable.ExtendRecyclerView;
 import jcoolj.com.base.view.scrollable.ScrollBehavior;
 import jcoolj.com.base.view.scrollable.ScrollState;
 import jcoolj.com.core.network.Subscriber;
-import jcoolj.com.core.utils.Logger;
 import jcoolj.com.dribbble.R;
 import jcoolj.com.dribbble.data.FavoritesManager;
 import jcoolj.com.dribbble.data.FavoritesProvider;
@@ -236,9 +229,9 @@ public class ShotCard extends FrameLayout implements Subscriber<List<Comment>>, 
                         }
                     }
                 };
-            if(shot.getAttachmentsCount() > 0)
+            if(shot.getAttachments_count() > 0)
                 shotsManager.getAttachments(attachmentSubscriber, shot.getId());
-            if(shot.getComments() > 0) {
+            if(shot.getComments_count() > 0) {
                 isCommentsLoading = true;
                 shotsManager.getComments(this, shot.getId(), DEFAULT_COMMENTS_PER_PAGE);
             } else
@@ -247,9 +240,9 @@ public class ShotCard extends FrameLayout implements Subscriber<List<Comment>>, 
             view_shotTitle.setText(shot.getTitle());
 
             Resources res = getResources();
-            view_views.setText(Html.fromHtml("<b>" + shot.getViews() + "</b> " + res.getString(R.string.views)));
-            view_likes.setText(Html.fromHtml("<b>" + shot.getLikes() + "</b> " + res.getString(R.string.likes)));
-            view_comments.setText(Html.fromHtml("<b>" + shot.getComments() + "</b> " + res.getString(R.string.comments)));
+            view_views.setText(Html.fromHtml("<b>" + shot.getViews_count() + "</b> " + res.getString(R.string.views)));
+            view_likes.setText(Html.fromHtml("<b>" + shot.getLikes_count() + "</b> " + res.getString(R.string.likes)));
+            view_comments.setText(Html.fromHtml("<b>" + shot.getComments_count() + "</b> " + res.getString(R.string.comments)));
             String description = shot.getDescription();
             view_description.setText((TextUtils.isEmpty(description) || description.equals("null")) ?
                     Html.fromHtml("<p>" + getContext().getString(R.string.no_description) + "</p>") : Html.fromHtml(description));

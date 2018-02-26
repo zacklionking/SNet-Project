@@ -8,7 +8,7 @@
     <string name="no_description">No description.</string>
 
     <string name="loading_shots">Loading shots ...</string>
-    <string name="loading_comments">Loading comments ...</string>
+    <string name="loading_comments">Loading comments_count ...</string>
     <string name="loading_shot_fail">Oops, something goes wrong ...\nClick to try again</string>
 
     <string name="users">Users</string>

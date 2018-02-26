@@ -1,5 +1,6 @@
 package jcoolj.com.dribbble.fragment;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -16,7 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jcoolj.com.base.BaseActivity;
 import jcoolj.com.base.PageFragment;
+import jcoolj.com.base.utils.PixelUtils;
 import jcoolj.com.base.view.scrollable.ExtendRecyclerView;
 import jcoolj.com.base.view.scrollable.ScrollBehavior;
 import jcoolj.com.base.view.scrollable.ScrollState;
@@ -44,7 +47,7 @@ public class FavoritesFragment extends PageFragment implements LoaderManager.Loa
         listView.setAdapter(adapter);
 
         View header = inflater.inflate(R.layout.view_blank_bar, container, false);
-        header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getTitleBar().getTitleBarHeight()));
+        header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, PixelUtils.getTitleBarHeight(getContext())));
         listView.setHeaderView(header);
         Logger.d("favorite onInflated");
         getLoaderManager().initLoader(FavoritesManager.TYPE_USER, null, this);
@@ -118,11 +121,9 @@ public class FavoritesFragment extends PageFragment implements LoaderManager.Loa
 
     @Override
     public void onScrollDirectionChanged(ScrollState direction) {
-        if (direction == ScrollState.UP) {
-            getTitleBar().hide();
-        } else if (direction == ScrollState.DOWN) {
-            getTitleBar().show();
-        }
+        Activity activity = getActivity();
+        if(activity != null && activity instanceof ScrollBehavior)
+            ((ScrollBehavior) activity).onScrollDirectionChanged(direction);
     }
 
 }

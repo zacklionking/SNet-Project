@@ -23,11 +23,11 @@ public class Shot implements Parcelable {
     private String description;
     private String imgUrl;
     private String teaserUrl;
-    private int views;
-    private int likes;
-    private int comments;
+    private int views_count;
+    private int likes_count;
+    private int comments_count;
     private boolean animated;
-    private int attachmentsCount;
+    private int attachments_count;
 
     private User user;
     private User team;
@@ -45,10 +45,10 @@ public class Shot implements Parcelable {
         setTeaserUrl(imgs.optString("teaser"));
         if(TextUtils.isEmpty(imgUrl) || imgUrl.equals("null"))
             imgUrl = teaserUrl;
-        setViews(obj.optInt("views_count"));
-        setComments(obj.optInt("comments_count"));
-        setLikes(obj.optInt("likes_count"));
-        setAttachmentsCount(obj.optInt("attachments_count"));
+        setViews_count(obj.optInt("views_count"));
+        setComments_count(obj.optInt("comments_count"));
+        setLikes_count(obj.optInt("likes_count"));
+        setAttachments_count(obj.optInt("attachments_count"));
         setAnimated(obj.optBoolean("animated"));
     }
 
@@ -92,28 +92,28 @@ public class Shot implements Parcelable {
         this.teaserUrl = teaserUrl;
     }
 
-    public int getViews() {
-        return views;
+    public int getViews_count() {
+        return views_count;
     }
 
-    public void setViews(int views) {
-        this.views = views;
+    public void setViews_count(int views_count) {
+        this.views_count = views_count;
     }
 
-    public int getLikes() {
-        return likes;
+    public int getLikes_count() {
+        return likes_count;
     }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setLikes_count(int likes_count) {
+        this.likes_count = likes_count;
     }
 
-    public int getComments() {
-        return comments;
+    public int getComments_count() {
+        return comments_count;
     }
 
-    public void setComments(int comments) {
-        this.comments = comments;
+    public void setComments_count(int comments_count) {
+        this.comments_count = comments_count;
     }
 
     public boolean isAnimated() {
@@ -124,12 +124,12 @@ public class Shot implements Parcelable {
         this.animated = animated;
     }
 
-    public int getAttachmentsCount() {
-        return attachmentsCount;
+    public int getAttachments_count() {
+        return attachments_count;
     }
 
-    public void setAttachmentsCount(int attachmentsCount) {
-        this.attachmentsCount = attachmentsCount;
+    public void setAttachments_count(int attachments_count) {
+        this.attachments_count = attachments_count;
     }
 
     public User getUser() {
@@ -160,11 +160,11 @@ public class Shot implements Parcelable {
         dest.writeString(description);
         dest.writeString(imgUrl);
         dest.writeString(teaserUrl);
-        dest.writeInt(views);
-        dest.writeInt(likes);
-        dest.writeInt(comments);
+        dest.writeInt(views_count);
+        dest.writeInt(likes_count);
+        dest.writeInt(comments_count);
         dest.writeInt(animated ? 1 : 0);
-        dest.writeInt(attachmentsCount);
+        dest.writeInt(attachments_count);
         dest.writeParcelable(user, flags);
         dest.writeParcelable(team, flags);
     }
@@ -178,11 +178,11 @@ public class Shot implements Parcelable {
             shot.description = in.readString();
             shot.imgUrl = in.readString();
             shot.teaserUrl = in.readString();
-            shot.views = in.readInt();
-            shot.likes = in.readInt();
-            shot.comments = in.readInt();
+            shot.views_count = in.readInt();
+            shot.likes_count = in.readInt();
+            shot.comments_count = in.readInt();
             shot.animated = in.readInt() == 1;
-            shot.attachmentsCount = in.readInt();
+            shot.attachments_count = in.readInt();
             shot.user = in.readParcelable(User.class.getClassLoader());
             shot.team = in.readParcelable(User.class.getClassLoader());
             return shot;

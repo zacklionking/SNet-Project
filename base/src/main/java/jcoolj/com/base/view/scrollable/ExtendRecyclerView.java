@@ -184,7 +184,7 @@ public class ExtendRecyclerView extends RecyclerView implements Scrollable {
                 // Because if the ACTION_DOWN is consumed by children and only ACTION_MOVEs are
                 // passed to parent (this view), the flags will be invalid.
                 // Also, applications might implement initialization codes to onDownMotionEvent,
-                // so call it here.
+                // so onResponse it here.
                 mFirstScroll = mDragging = true;
                 break;
         }

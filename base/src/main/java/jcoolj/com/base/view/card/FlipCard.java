@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import jcoolj.com.base.R;
 import jcoolj.com.base.anim.Rotate3dAnimation;
 
-public class FlipCard extends FrameLayout {
+public class FlipCard extends FrameLayout implements Animation.AnimationListener {
 
     private View frontView;
     private View backView;
@@ -23,6 +23,7 @@ public class FlipCard extends FrameLayout {
     private Rotate3dAnimation rotateAnim;
 
     private FlipListener listener;
+
     public interface FlipListener{
         void onFlipped();
         void onCardChanged();
@@ -58,6 +59,7 @@ public class FlipCard extends FrameLayout {
         typedArray.recycle();
 
         rotateAnim = new Rotate3dAnimation(context);
+        rotateAnim.setAnimationListener(this);
         rotateAnim.setDuration(150);
         rotateAnim.setInterpolator(new AccelerateInterpolator());
     }
@@ -83,49 +85,50 @@ public class FlipCard extends FrameLayout {
 
     public void flip(){
         rotateAnim.setCenter(getWidth()/2, 0).setDegree(0, isBackside? -90 : 90);
-        rotateAnim.setAnimationListener(new Animation.AnimationListener() {
-
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                backView.setVisibility(isBackside ? GONE : VISIBLE);
-                frontView.setVisibility(isBackside ? VISIBLE : GONE);
-                rotateAnim.setCenter(getWidth()/2, 0).setDegree(isBackside ? 90 : -90, 0);
-                rotateAnim.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        isBackside = !isBackside;
-                        if(listener != null)
-                            listener.onFlipped();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-                startAnimation(rotateAnim);
-                if (listener != null)
-                    listener.onCardChanged();
-            }
-        });
+        rotateAnim.setAnimationListener(this);
         startAnimation(rotateAnim);
     }
 
     public boolean isBackside(){
         return isBackside;
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        backView.setVisibility(isBackside ? GONE : VISIBLE);
+        frontView.setVisibility(isBackside ? VISIBLE : GONE);
+        rotateAnim.setCenter(getWidth()/2, 0).setDegree(isBackside ? 90 : -90, 0);
+        rotateAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                isBackside = !isBackside;
+                if(listener != null)
+                    listener.onFlipped();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        startAnimation(rotateAnim);
+        if (listener != null)
+            listener.onCardChanged();
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 
 }

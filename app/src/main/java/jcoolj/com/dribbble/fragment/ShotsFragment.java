@@ -1,5 +1,6 @@
 package jcoolj.com.dribbble.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -51,7 +52,7 @@ public abstract class ShotsFragment extends PageFragment implements ScrollBehavi
         gallery.setHasFixedSize(true);
         gallery.addScrollViewCallbacks(this);
 
-        final Context context = getContext();
+        final Context context = getActivity();
         adapter = new ShotsAdapter(context, shots);
         adapter.setOnItemClickListener(new ExtendAdapter.OnItemClickListener() {
             @Override
@@ -108,7 +109,7 @@ public abstract class ShotsFragment extends PageFragment implements ScrollBehavi
 
     @Override
     public void refresh() {
-        shotsManager.setShotsRequestPage(1);
+        shotsManager.reset();
         isRefreshing = true;
         load();
     }
@@ -151,11 +152,9 @@ public abstract class ShotsFragment extends PageFragment implements ScrollBehavi
 
     @Override
     public void onScrollDirectionChanged(ScrollState direction) {
-        if (direction == ScrollState.UP) {
-            getTitleBar().hide();
-        } else if (direction == ScrollState.DOWN) {
-            getTitleBar().show();
-        }
+        Activity activity = getActivity();
+        if(activity != null && activity instanceof ScrollBehavior)
+            ((ScrollBehavior) activity).onScrollDirectionChanged(direction);
     }
 
     @Override

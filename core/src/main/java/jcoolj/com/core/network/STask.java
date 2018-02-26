@@ -1,30 +1,70 @@
 package jcoolj.com.core.network;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.os.SystemClock;
 
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import org.json.JSONObject;
 
 import jcoolj.com.core.utils.Logger;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Zack on 2016/11/2.
  */
-public class STask extends Task {
+public class STask<T> extends Task {
 
     private Request request;
+    private String response;
 
-    private Subscriber subscriber;
-    private ResponseWrapped responseWrapped;
+    private Subscriber<T> subscriber;
+    private T data;
 
-    public STask(int taskId, Request request, Subscriber subscriber, Handler handler){
+    private Interceptor<T> interceptor;
+    public interface Interceptor<T>  {
+        T onResponse(int id, String response) throws Exception;
+    }
+
+    STask(int taskId, Request request, Subscriber<T> subscriber, Handler handler){
         super(taskId, handler);
         this.subscriber = subscriber;
         this.request = request;
-//        setTimeout(0);  // 使用HttpClient的默认设置
+    }
+
+    @Override
+    public void start(){
+        super.start();
+        if(subscriber != null) {
+            Logger.d(toString() + " started at " + System.currentTimeMillis() + ", " + this);
+            subscriber.onSubscribe();
+        } else
+            Logger.d(toString() + " started at " + System.currentTimeMillis() + ", " + this);
+    }
+
+    /**
+     * Task在工作线程中运行时的回调
+     * @param interceptor
+     * @return
+     */
+    public STask<T> setInterceptor(Interceptor<T> interceptor){
+        this.interceptor = interceptor;
+        return this;
+    }
+
+    void complete(){
+        Logger.d(this + " completed.");
+        if(subscriber != null)
+            subscriber.onComplete(data);
+    }
+
+    void reportError(){
+        if(subscriber != null)
+            subscriber.onRefuse(getException());
+    }
+
+    void reportError(Throwable e){
+        if(subscriber != null)
+            subscriber.onRefuse(e);
     }
 
     @Override
@@ -34,32 +74,34 @@ public class STask extends Task {
             Logger.d(toString() + "cancelled");
             return;
         }
+        if(response == null || response.body() == null)
+            return;
         int code = response.code();
-        String responseBody = response.body().string();
+        this.response = response.body().string();
         switch (code) {
             case 503:
-                responseWrapped = new ResponseWrapped(response.code(), response.headers(), "");
-                setException(new Exception("Service out"));
-                handleMessage(SNetManager.MSG_SERVICE_OUT);
+                handleException(new ServiceOutException());
+                break;
+            case 200:
+                try {
+                    if(interceptor != null)
+                        data = interceptor.onResponse(getTaskId(), this.response);
+                    Message msg = handler.obtainMessage(SNetManager.MSG_COMPLETE);
+                    msg.obj = this;
+                    handler.sendMessage(msg);
+                } catch (Exception e){
+                    handleException(e);
+                }
                 break;
             default:
-                Logger.d(toString() + "completed. Result:" + responseBody);
-                responseWrapped = new ResponseWrapped(response.code(), response.headers(), responseBody);
-                handleMessage(SNetManager.MSG_COMPLETE);
+                try {
+                    String responseBody = response.body().string();
+                    handleException(new Exception(new JSONObject(responseBody).getString("message")));
+                } catch (Exception e){
+                    handleException(new Exception("Unknown error."));
+                }
                 break;
         }
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public ResponseWrapped getResponse() {
-        return responseWrapped;
-    }
-
-    public Subscriber getSubscriber() {
-        return subscriber;
     }
 
     @Override

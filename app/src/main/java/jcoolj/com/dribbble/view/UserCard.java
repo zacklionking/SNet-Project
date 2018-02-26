@@ -180,7 +180,7 @@ public class UserCard extends FrameLayout implements ScrollBehavior, View.OnClic
     public void refresh(){
         if(userChanged) {
             shots.clear();
-            shotsManager.setShotsRequestPage(1);
+            shotsManager.reset();
             getUserShots(user.getId());
             getTeamMembers(user.getId());
         }

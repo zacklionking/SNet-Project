@@ -137,6 +137,7 @@ public class LoginActivity extends FullScreenActivity implements OnLoadListener,
     @Override
     public void onComplete(StoredCredential credential) {
         Logger.d("Get accessToken "+credential.getAccessToken() + " Expired "+credential.getExpirationTimeMilliseconds());
+        finish();
     }
 
 }

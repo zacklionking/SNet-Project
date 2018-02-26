@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "jcoolj.com.dribbble"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 2
         versionName "1.0"
     }
@@ -27,7 +27,7 @@ configurations {
 
 dependencies {
     compile project(':base')
-    compile ('com.google.api-client:google-api-client:1.20.0'){
+    compile('com.google.api-client:google-api-client:1.20.0') {
         exclude group: 'com.google.android.google-play-services', module: 'google-play-services'
         exclude group: 'junit', module: 'junit'
         exclude group: 'com.google.android', module: 'android'

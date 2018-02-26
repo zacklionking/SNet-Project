@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_card_top"
         android:gravity="center_horizontal"
-        android:padding="@dimen/middle_padding">
+        android:paddingTop="@dimen/ultra_padding"
+        android:paddingLeft="@dimen/middle_padding"
+        android:paddingRight="@dimen/middle_padding"
+        android:paddingBottom="@dimen/middle_padding">
 
         <ImageView android:id="@id/user_avatar"
             android:layout_width="@dimen/avatar_size"

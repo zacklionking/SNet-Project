@@ -605,7 +605,7 @@ public class TouchImageView extends ImageView {
         } else {
             //
             // These values should never be 0 or we will setDegree viewWidth and viewHeight
-            // to NaN in translateMatrixAfterRotate. To avoid this, call savePreviousImageValues
+            // to NaN in translateMatrixAfterRotate. To avoid this, onResponse savePreviousImageValues
             // to setDegree them equal to the current values.
             //
             if (prevMatchViewWidth == 0 || prevMatchViewHeight == 0) {

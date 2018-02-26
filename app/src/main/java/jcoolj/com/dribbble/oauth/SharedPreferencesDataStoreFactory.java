@@ -32,7 +32,7 @@ import jcoolj.com.core.utils.Logger;
  */
 public class SharedPreferencesDataStoreFactory implements DataStoreFactory {
 
-    /** Lock on access to the data store map. */
+    /** Lock on access to the data store setInterceptor. */
     private final Lock lock = new ReentrantLock();
 
     /** Map of data store ID to data store. */
@@ -71,7 +71,7 @@ public class SharedPreferencesDataStoreFactory implements DataStoreFactory {
         /** Lock on access to the store. */
         private final Lock lock = new ReentrantLock();
 
-        /** Data store map from the key to the value. */
+        /** Data store setInterceptor from the key to the value. */
         HashMap<String, byte[]> keyValueMap = Maps.newHashMap();
 
         private final SharedPreferences prefs;
@@ -204,7 +204,7 @@ public class SharedPreferencesDataStoreFactory implements DataStoreFactory {
         }
 
         /**
-         * Persist the key-value map into storage at the end of {@link #set}, {@link #delete(String)}, and
+         * Persist the key-value setInterceptor into storage at the end of {@link #set}, {@link #delete(String)}, and
          * {@link #clear()}.
          */
         private void save() throws IOException {

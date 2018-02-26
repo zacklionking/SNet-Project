@@ -20,7 +20,7 @@ public class PixelUtils {
 
     public static int getTitleBarHeight(Context context) {
         if(context instanceof BaseActivity)
-            return ((BaseActivity) context).getTitleBar().getTitleBarHeight();
+            return ((BaseActivity) context).getTitleBarHeight();
         else
             return context.getResources().getDimensionPixelSize(R.dimen.title_bar_height);
     }
